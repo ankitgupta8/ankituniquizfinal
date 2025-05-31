@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,10 +60,15 @@ export function QuizForm({ onSubmit, onPreview }: QuizFormProps) {
         chapterName: "Basic Algebra",
         quizQuestions: [
           {
-            question: "What is the value of x in 2x + 4 = 10?",
-            options: ["2", "3", "4", "5"],
-            correctAnswer: "3",
-            explanation: "2x + 4 = 10\n2x = 6\nx = 3"
+            question: "Solve the quadratic equation: $x^2 + 5x + 6 = 0$",
+            options: [
+              "$x = -2$ or $x = -3$",
+              "$x = 2$ or $x = 3$",
+              "$x = -1$ or $x = -6$",
+              "$x = 1$ or $x = 6$"
+            ],
+            correctAnswer: "$x = -2$ or $x = -3$",
+            explanation: "To solve $x^2 + 5x + 6 = 0$:\n\n$$\\begin{align*} x^2 + 5x + 6 &= 0 \\\\ (x + 2)(x + 3) &= 0 \\\\ x &= -2 \\text{ or } x = -3 \\end{align*}$$"
           }
         ]
       }

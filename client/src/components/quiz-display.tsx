@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { CheckCircle2, XCircle, Eye, Home } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Link } from "wouter";
+import { LatexRenderer } from "./latex-renderer";
 
 type QuizDisplayProps = {
   quiz: Quiz;
@@ -100,7 +101,9 @@ export function QuizDisplay({ quiz, onComplete, subject }: QuizDisplayProps) {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <p className="text-lg text-gray-700">{currentQuestion.question}</p>
+              <div className="text-lg text-gray-700">
+                <LatexRenderer content={currentQuestion.question} />
+              </div>
 
               <RadioGroup
                 value={answers[currentQuestionIndex]}
@@ -120,7 +123,7 @@ export function QuizDisplay({ quiz, onComplete, subject }: QuizDisplayProps) {
                   >
                     <RadioGroupItem value={option} id={option} />
                     <Label htmlFor={option} className="flex-1 cursor-pointer text-gray-800">
-                      {option}
+                      <LatexRenderer content={option} />
                     </Label>
                     {(showCurrentAnswer || showResults) && (
                       <>
@@ -141,7 +144,9 @@ export function QuizDisplay({ quiz, onComplete, subject }: QuizDisplayProps) {
                 <Alert className="rounded-lg shadow-md">
                   <AlertDescription>
                     <p className="font-medium mb-2 text-gray-800">Explanation:</p>
-                    <p className="text-gray-700">{currentQuestion.explanation}</p>
+                    <div className="text-gray-700">
+                      <LatexRenderer content={currentQuestion.explanation} />
+                    </div>
                   </AlertDescription>
                 </Alert>
               )}
@@ -223,17 +228,17 @@ export function QuizDisplay({ quiz, onComplete, subject }: QuizDisplayProps) {
                 {currentChapter?.quizQuestions.map((question, index) => (
                   <div key={index} className="space-y-2">
                     <p className="font-medium text-gray-800">
-                      Question {index + 1}: {question.question}
+                      Question {index + 1}: <LatexRenderer content={question.question} />
                     </p>
                     <p className={answers[index] === question.correctAnswer ? "text-green-600" : "text-red-600"}>
-                      Your Answer: {answers[index]}
+                      Your Answer: <LatexRenderer content={answers[index]} />
                     </p>
                     <p className="text-green-600">
-                      Correct Answer: {question.correctAnswer}
+                      Correct Answer: <LatexRenderer content={question.correctAnswer} />
                     </p>
-                    <p className="text-sm text-gray-600">
-                      {question.explanation}
-                    </p>
+                    <div className="text-sm text-gray-600">
+                      <LatexRenderer content={question.explanation} />
+                    </div>
                   </div>
                 ))}
               </div>
